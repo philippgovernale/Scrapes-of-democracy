@@ -13,7 +13,11 @@ A GUI app and scraping library to scrape and view government consultations.
 * Cross-platform (theoretically!)
 
 ## Run
+```pip install -r requirements.txt```
+
 ```python app.py```
+
+**Note** Requires Python 3.11
 
 ## Polis scripts
 Currenly scripts exist for the following NZ government organisations:
