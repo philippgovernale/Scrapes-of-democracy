@@ -20,9 +20,17 @@ A GUI app and scraping library to scrape and view government consultations.
 **Note** Requires Python 3.11
 
 ## Polis scripts
-Currenly scripts exist for the following NZ government organisations:
+Currently scripts exist for the following NZ government organisations:
 * Ministry for the Environment
 * Climate Change Commission
 * Ministry of Transport
 * Ministry for Primary Industries
 * Ministry for Business, Innovation and Employment
+* Ministry of Justice
+* Ministry of Education
+* Oranga Tamariki
+
+## FAQ
+
+**A script fails with HTTP forbidden error**
+The server has blocked your access. Currently there is no workaround, so you will need to disable the script. Press 'refresh' and uncheck the failing script. 
