@@ -157,7 +157,8 @@ class Model():
 		for exception in exceptions:
 			scraper_msg = ""
 
-			reason = exception.reason
+			if isinstance(exception, (HTTPError, URLError)):
+				reason = exception.reason
 			exception_type = type(exception)
 
 			#get info for the first element in the traceback
@@ -168,7 +169,7 @@ class Model():
 			match exception:
 				case HTTPError():
 					scraper_msg = (
-						f'The scraper script {fp} raised an HTTPError on line {line}. '
+						f'The scraper script {fp} raised an HTTPError with reason {reason} on line {line}. '
 						f'This likely occured because they detected and blocked our scraping attempt. '
 						f'Please visit the website to check for updates \n\n.'
 					)
