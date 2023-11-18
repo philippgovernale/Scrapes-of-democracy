@@ -28,12 +28,12 @@ class ScrapeGroupError(Exception):
 	def __init__(self, exceptions):
 		self.scraper_exceptions = exceptions
 
-async def _scrape(orgs_to_scrape: list[SCRAPER_ENUM]):
+async def _scrape(orgs_to_scrape: list[SCRAPER_ENUM], silent_fail):
 	scraper_funcs = [scraper.value.func() for scraper in orgs_to_scrape]
 
 	all_scrapers_results = await asyncio.gather(*scraper_funcs, return_exceptions=True)
 
-	data, exceptions = [], []
+	data, exceptions, group_exception = [], [], None
 	for scraper_result in all_scrapers_results:
 		if isinstance(scraper_result, Exception):
 			exceptions.append(scraper_result)
@@ -42,11 +42,16 @@ async def _scrape(orgs_to_scrape: list[SCRAPER_ENUM]):
 		data.extend(scraper_result) #flatten
 
 	if exceptions:
-		raise ScrapeGroupError(exceptions)
+		group_exception = ScrapeGroupError(exceptions)
+		if not silent_fail:
+			raise group_exception
 
-	return data
+	if silent_fail:
+		return (data, group_exception)
+	else:
+		return data
 
-def scrape(orgs_to_scrape: list[SCRAPER_ENUM]):
+def scrape(orgs_to_scrape: list[SCRAPER_ENUM], silent_fail = True):
 	"""
 	Scrape the organisations provided in the input list
 
@@ -56,7 +61,7 @@ def scrape(orgs_to_scrape: list[SCRAPER_ENUM]):
 	Returns:
 		List of dicts or exception objs for each organisation scraped
 	"""
-	return asyncio.run(_scrape(orgs_to_scrape))
+	return asyncio.run(_scrape(orgs_to_scrape, silent_fail = True))
 
 def scrape_all():
 	"""
@@ -65,4 +70,4 @@ def scrape_all():
 	Returns:
 		List of dicts or exception objs for each organisation scraped
 	"""
-	return asyncio.run(_scrape(SCRAPERS))
+	return asyncio.run(_scrape(SCRAPERS, silent_fail))

@@ -32,7 +32,6 @@ class ToolBar(tk.Frame):
 		filter_org_btn.pack(anchor=tk.E, side='right', padx=15, ipady=3)
 		entry_state_menu.pack(anchor=tk.E, side='right', ipady=3)
 
-
 		self.filter_org_window.protocol('WM_DELETE_WINDOW', self.filter_org_window.withdraw)
 		self.refresh_selected_window.protocol('WM_DELETE_WINDOW', self.refresh_selected_window.withdraw)
 		sel_entry_state.trace('w', lambda var,index,mode,selected_filter=sel_entry_state: controller.select_entry_filter(selected_filter))

@@ -121,12 +121,15 @@ class Model():
 		self.scraper_data = ScraperGroupDataHandler(data_path)
 
 	def scrape(self, orgs_to_scrape: list) -> None:
-		res_dict = polis.scrape(orgs_to_scrape)
+		res_dict, exception = polis.scrape(orgs_to_scrape)
 
 		res_cons = [Consultation.from_dict(cons) for cons in res_dict]
 		res_entry = [Entry(entry, EntryUserData()) for entry in res_cons]
 
 		self.scraper_data.update_data(res_entry)
+
+		if exception:
+			raise exception
 
 	@staticmethod
 	def sort_entries(entries: list[Entry], sort_type: EntrySortVar) -> list[Entry]:

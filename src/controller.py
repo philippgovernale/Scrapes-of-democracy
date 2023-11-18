@@ -124,16 +124,7 @@ class Controller():
 		scrape_future.add_done_callback(self._refresh_complete)
 
 	def _refresh_complete(self, scrape_future) -> None:
-		scraper_exceptions = scrape_future.exception()
-		if scraper_exceptions:
-			print(scraper_exceptions)
-			error_msg = self.model.get_scraping_exceptions_msg(scraper_exceptions.scraper_exceptions)
-			self.status = Status.FAILED
-			self.view.show_error(error_msg)
-			self.status = Status.IDLE
-			return
 
-		self.status = Status.DONE
 		self.view.toolbar.set_refresh_btn_state(is_enabled=True)
 
 		#Select Date scraped sorting so that new entries always show on top
@@ -145,6 +136,17 @@ class Controller():
 		new_entries_txt = "{} new entries".format(n_new_entries)
 		self.view.statusbar.message_txt.set(new_entries_txt)
 		self.view.statusbar.after(4000, lambda : self.view.statusbar.message_txt.set(""))
+
+		scraper_exceptions = scrape_future.exception()
+
+		if scraper_exceptions:
+			print(scraper_exceptions)
+			error_msg = self.model.get_scraping_exceptions_msg(scraper_exceptions.scraper_exceptions)
+			self.status = Status.FAILED
+			self.view.show_error(error_msg)
+			self.status = Status.IDLE
+		else:
+			self.status = Status.DONE
 
 	def select_entry(self, entry, entry_wdgs: list) -> None:
 		#if selected_entry_wdgs is not None then we need to revert the old widgets back to the unselected colour
