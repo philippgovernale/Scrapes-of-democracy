@@ -32,7 +32,7 @@ class SortEntryBar(tk.Frame):
 
 		self.organisation = tk.Label(self, text='Organisation', bg=GuiColours.MAINAREA_BG.value)
 		self.title = tk.Label(self, text='Title', bg=GuiColours.MAINAREA_BG.value)
-		self.date_exp = tk.Label(self, text='Expiry', bg=GuiColours.MAINAREA_BG.value)
+		self.date_exp = tk.Label(self, text='Closes', bg=GuiColours.MAINAREA_BG.value)
 		self.date_scraped = tk.Label(self, text='Scraped', bg=GuiColours.MAINAREA_BG.value)
 
 		self.organisation.pack(side=tk.LEFT, padx=7)

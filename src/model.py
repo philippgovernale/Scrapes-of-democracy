@@ -38,8 +38,8 @@ class Consultation():
 	def days_remaining(self):
 		if not self._date:
 			return 'No date'
-		elif not self.current:
-			return 'EXPIRED'
+		elif not self.open:
+			return 'CLOSED'
 		elif self.is_today:
 			return 'Today'
 
@@ -47,7 +47,7 @@ class Consultation():
 		return delta.days
 
 	@property
-	def current(self) -> bool:
+	def open(self) -> bool:
 		if not self._date:
 			return True
 		return datetime.datetime.date(self._date) >= datetime.date.today()

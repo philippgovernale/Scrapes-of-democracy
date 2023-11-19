@@ -7,8 +7,8 @@ class EntryViewFilters(enum.Enum):
 	READ = 'Read'
 	UNREAD = 'Unread'
 	IMPORTANT = 'Important'
-	CURRENT = 'Current'
-	LAPSED = 'Lapsed'
+	OPEN = 'Open'
+	CLOSED = 'Closed'
 
 class ToolBar(tk.Frame):
 	def __init__(self, parent, controller):

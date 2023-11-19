@@ -28,7 +28,7 @@ class Controller():
 		self.selected_entry_wdgs = None
 		self.selected_entry = None
 		self.displayed_orgs = {scraper: True for scraper in polis.SCRAPERS}
-		self.entry_view_filter = EntryViewFilters.CURRENT
+		self.entry_view_filter = EntryViewFilters.OPEN
 
 		self.model = model
 		self.view = View(self)
@@ -224,7 +224,7 @@ class Controller():
 
 			n_days = entry.entry_data.days_remaining
 			match entry.entry_data.days_remaining:
-				case "EXPIRED" | 'No date' | 'Today':
+				case "CLOSED" | 'No date' | 'Today':
 					date_exp_str = f"{n_days}"
 				case 1:
 					date_exp_str = f"{n_days} day"
@@ -274,10 +274,10 @@ class Controller():
 					entries_list = [entry for entry in entries_list if not entry.entry_user_data.seen]
 				case EntryViewFilters.IMPORTANT:
 					entries_list = [entry for entry in entries_list if entry.entry_user_data.important]
-				case EntryViewFilters.CURRENT:
-					entries_list = [entry for entry in entries_list if entry.entry_data.current]
-				case EntryViewFilters.LAPSED:
-					entries_list = [entry for entry in entries_list if not entry.entry_data.current]
+				case EntryViewFilters.OPEN:
+					entries_list = [entry for entry in entries_list if entry.entry_data.open]
+				case EntryViewFilters.CLOS:
+					entries_list = [entry for entry in entries_list if not entry.entry_data.open]
 
 			return entries_list
 
