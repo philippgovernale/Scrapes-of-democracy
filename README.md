@@ -1,6 +1,6 @@
 # Scrap(e)s of Democracy
 
-A GUI app and scraping library to scrape, collate and view government consultations. While the NZ government has its own cross-government consultation platform, at the moment the service only collates consultations from a limited number of agencies.
+A GUI app and scraping library to scrape, collate and view government consultations. While the NZ government has [its own cross-government consultation platform](https://www.govt.nz/browse/engaging-with-government/consultations-have-your-say/consultations-listing/?status=Open), at the moment the service only collates consultations from a limited number of agencies.
 
 ![image](https://github.com/philippgovernale/Scrapes-of-democracy/assets/16997121/2ce1507a-7da8-46d1-9c75-80ef1bde7e1f)
 
