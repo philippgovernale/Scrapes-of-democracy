@@ -44,10 +44,19 @@ class ToolBar(tk.Frame):
 
 class FilterWindow(tk.Toplevel):
 	def __init__(self, controller, ok_btn_func):
-		super().__init__()
+		super().__init__(borderwidth=10)
 
 		heading = tk.Label(self, text="Organisations")
 		heading.pack()
+
+		self.toggle_checkbtns_var = tk.BooleanVar(self, True)
+		self.toggle_checkbtns_var.trace('w', lambda var,index,mode: self.toggle_checkbuttons())
+
+		toggle_all_checkbtns_checkbutton = ttk.Checkbutton(self, variable=self.toggle_checkbtns_var)
+		toggle_all_checkbtns_checkbutton.pack(anchor=tk.W)
+
+		sep = ttk.Separator(self)
+		sep.pack(fill=tk.X, pady=[0, 10])
 
 		scrape_orgs = controller._get_scrape_orgs()
 
@@ -55,10 +64,14 @@ class FilterWindow(tk.Toplevel):
 		for scrape_org in scrape_orgs:
 			org_is_selected = tk.BooleanVar(self, True)
 
-			org_checkbutton = tk.Checkbutton(self, text=scrape_org.value.name, variable=org_is_selected)
+			org_checkbutton = ttk.Checkbutton(self, text=scrape_org.value.name, variable=org_is_selected)
 			org_checkbutton.pack(anchor=tk.W)
 
 			self.org_checkbuttons.append((scrape_org, org_is_selected))
 
 		ok_btn = ttk.Button(self, text='Ok', command= ok_btn_func)
 		ok_btn.pack(pady=10)
+
+	def toggle_checkbuttons(self):
+		for _ , checkbutton in self.org_checkbuttons:
+			checkbutton.set(self.toggle_checkbtns_var.get())
