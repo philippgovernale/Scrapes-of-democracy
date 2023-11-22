@@ -31,7 +31,7 @@ async def scrape_moe_consultations(get_html_func=_get_soup_urllib) -> list[dict]
 		for html_entry in html_entries:
 			title =  clean_str(str(html_entry.div.h3.a.string))
 			url = clean_str(str(html_entry.div.h3.a.get('href')))
-			blurb = clean_str(str(html_entry.div.p.string))
+			blurb = clean_str(str(html_entry.div.p.span.text))
 			date_unf = clean_str(str(html_entry.find('p', {'class': 'cs-date'}).text).replace('Closes',''))
 
 			if date_unf.lower() == 'today':
