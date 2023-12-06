@@ -36,6 +36,11 @@ class Consultation():
 
 	@property
 	def days_remaining(self):
+		delta = datetime.datetime.date(self._date) - datetime.date.today()
+		return delta.days
+
+	@property
+	def date_formatted(self):
 		if not self._date:
 			return 'No date'
 		elif not self.open:
@@ -43,8 +48,14 @@ class Consultation():
 		elif self.is_today:
 			return 'Today'
 
-		delta = datetime.datetime.date(self._date) - datetime.date.today()
-		return delta.days
+		n_days = self.days_remaining
+		match n_days:
+			case 1:
+				date_exp_str = f"{n_days} day"
+			case _:
+				date_exp_str = f"{n_days} days"
+
+		return date_exp_str
 
 	@property
 	def open(self) -> bool:
@@ -120,7 +131,7 @@ class Model():
 	def __init__(self, data_path: str) -> None:
 		self.scraper_data = ScraperGroupDataHandler(data_path)
 
-	def scrape(self, orgs_to_scrape: list) -> None:
+	def scrape(self, orgs_to_scrape = polis.SCRAPERS) -> None:
 		res_dict, exception = polis.scrape(orgs_to_scrape)
 
 		res_cons = [Consultation.from_dict(cons) for cons in res_dict]
