@@ -61,9 +61,9 @@ def scrape(orgs_to_scrape: list[SCRAPER_ENUM], silent_fail = True):
 	Returns:
 		List of dicts or exception objs for each organisation scraped
 	"""
-	return asyncio.run(_scrape(orgs_to_scrape, silent_fail = True))
+	return asyncio.run(_scrape(orgs_to_scrape, silent_fail = silent_fail))
 
-def scrape_all():
+def scrape_all(silent_fail = True):
 	"""
 	Scrape all the organisations that have a scraper in the scripts folder.
 
