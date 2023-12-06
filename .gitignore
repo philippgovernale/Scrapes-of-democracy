@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 *.pickle
+src/mailservice/CREDENTIALS
+src/mailservice/RECIPIENTS
