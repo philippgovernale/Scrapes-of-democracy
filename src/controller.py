@@ -222,15 +222,7 @@ class Controller():
 			#extracts data from Entry structure and applies formatting for view
 			CHAR_LEN_TITLE = 13
 
-			n_days = entry.entry_data.days_remaining
-			match entry.entry_data.days_remaining:
-				case "CLOSED" | 'No date' | 'Today':
-					date_exp_str = f"{n_days}"
-				case 1:
-					date_exp_str = f"{n_days} day"
-				case _:
-					date_exp_str = f"{n_days} days"
-
+			date_exp_str = entry.entry_data.date_formatted
 			date_scr_str = "{n_days} days ago".format(n_days= entry.entry_user_data.days_ago_scraped)
 
 			#Shorten the title
@@ -276,7 +268,7 @@ class Controller():
 					entries_list = [entry for entry in entries_list if entry.entry_user_data.important]
 				case EntryViewFilters.OPEN:
 					entries_list = [entry for entry in entries_list if entry.entry_data.open]
-				case EntryViewFilters.CLOS:
+				case EntryViewFilters.CLOSED:
 					entries_list = [entry for entry in entries_list if not entry.entry_data.open]
 
 			return entries_list
