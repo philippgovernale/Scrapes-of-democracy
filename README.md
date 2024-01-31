@@ -39,7 +39,7 @@ Mailservice sends an email with new consultations from an email account with smp
    ghvd hfjs hfjs kfks
    ```
 4. Create a RECIPIENTS plain text file and append each recipient email address on a newline
-5. If you don't want to configure when and how often the mailservice should send updates with new emails you can skip this step. By default it sends one email every week on a Wednesday at 1 pm. If you do wish to configure this and you are on WINDOWS, you will need to edit the fourth line of the batch script which runs the inbuilt schtasks command. You can find documentation on schtasks [here](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create). If you are on GNU/LINUX, then open the crontab file and edit it according to your needs. The ubuntu [crontab howto](https://help.ubuntu.com/community/CronHowto) may be of help 
+5. If you don't want to configure when and how often the mailservice should send updates with new emails you can skip this step. By default it sends one email every week on a Wednesday at 2 pm. If you do wish to configure this and you are on WINDOWS, you will need to edit the fourth line of the batch script which runs the inbuilt schtasks command. You can find documentation on schtasks [here](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create). If you are on GNU/LINUX, then open the crontab file and edit it according to your needs. The ubuntu [crontab howto](https://help.ubuntu.com/community/CronHowto) may be of help 
 6. If you are on on WINDOWS, run task_schedule.bat by double clicking on the file in explorer. If you are on GNU/LINUX, run ```crontab consultations_crontab```
 
 ## Polis scripts
