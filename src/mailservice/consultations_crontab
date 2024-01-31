@@ -22,5 +22,5 @@
 # 
 # m h  dom mon dow   command
 
-# Run every Monday at 2pm
-14 0 * * 1 run.sh
+# Run every Wednesday at 2pm
+14 0 * * 3 run.sh
