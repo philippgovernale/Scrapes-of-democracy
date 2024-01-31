@@ -15,6 +15,7 @@ A GUI app and scraping library to scrape, collate and view government consultati
 
 ## Setup
 **Note** Requires Python 3.11
+
 ```pip install -r requirements.txt```
 
 ## Run
