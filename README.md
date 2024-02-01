@@ -26,7 +26,7 @@ A GUI app and scraping library to scrape, collate and view government consultati
 ### Mailservice
 Mailservice sends an email with new consultations from an email account with smptp server support. To set it up follow the below instructions:
 
-1. Create a plain text file called CREDENTIALS
+1. Create a plain text file called CREDENTIALS in the mailservice folder
 2. Insert each of the following data on a newline in the CREDENTIALS file
    - smtp server address (i.e. smtp.gmail.com)
    - smtp server port (i.e. 587)
@@ -34,12 +34,12 @@ Mailservice sends an email with new consultations from an email account with smp
    - password (this should ideally be an app password. See [here](https://support.google.com/mail/answer/185833?hl=en) how to do this with gmail)
 3. Your file should look something like this
    ```
-   smtp.****.com
+   smtp.gmail.com
    587
    example@email.com
    ghvd hfjs hfjs kfks
    ```
-4. Create a RECIPIENTS plain text file and append each recipient email address on a newline
+4. Create a RECIPIENTS plain text file in the mailservice folder and append each recipient email address on a newline
 5. If you don't want to configure when and how often the mailservice should send updates with new emails you can skip this step. By default it sends one email every week on a Wednesday at 2 pm. If you do wish to configure this and you are on WINDOWS, you will need to edit the fourth line of the batch script which runs the inbuilt schtasks command. You can find documentation on schtasks [here](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create). If you are on GNU/LINUX, then open the crontab file and edit it according to your needs. The ubuntu [crontab howto](https://help.ubuntu.com/community/CronHowto) may be of help 
 6. If you are on on WINDOWS, run task_schedule.bat by double clicking on the file in explorer. If you are on GNU/LINUX, run ```crontab consultations_crontab```
 
